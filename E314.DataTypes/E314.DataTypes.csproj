@@ -19,14 +19,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\..\E314.DataTypes.Upm\Packages\com.e314.datatypes\README.md" Pack="true" PackagePath="\" />
-        <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
+        <None Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\README.md" Pack="true" PackagePath="\" />
+        <None Include="..\LICENSE" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="..\..\E314.DataTypes.Upm\Packages\com.e314.protect\Runtime\">
-        <Link>Runtime</Link>
-      </Folder>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\CapacityStrategy\CapacityStrategy.cs">
+        <Link>Runtime\CapacityStrategy\CapacityStrategy.cs</Link>
+      </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\CapacityStrategy\ICapacityStrategy.cs">
+        <Link>Runtime\CapacityStrategy\ICapacityStrategy.cs</Link>
+      </Compile>
     </ItemGroup>
 
 </Project>

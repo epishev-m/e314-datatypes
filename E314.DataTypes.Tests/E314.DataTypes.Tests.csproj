@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="..\..\E314.Protect.Upm\Packages\com.e314.protect\Tests\">
+      <Folder Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\">
         <Link>Tests</Link>
       </Folder>
     </ItemGroup>
