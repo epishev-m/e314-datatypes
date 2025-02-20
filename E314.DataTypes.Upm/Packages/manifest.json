@@ -3,5 +3,14 @@
     "com.unity.ide.rider": "3.0.34",
     "com.unity.test-framework": "1.4.6"
   },
-  "scopedRegistries": []
+  "scopedRegistries": [
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.e314"
+      ],
+      "overrideBuiltIns": false
+    }
+  ]
 }

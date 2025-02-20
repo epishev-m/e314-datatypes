@@ -5,5 +5,9 @@
   "author": {
     "name": "Maksim Epishev",
     "email": "epishev.m@mail.ru"
+  },
+  "dependencies": {
+    "com.e314.exceptions": "1.0.0",
+    "com.e314.protect": "2.0.0"
   }
 }

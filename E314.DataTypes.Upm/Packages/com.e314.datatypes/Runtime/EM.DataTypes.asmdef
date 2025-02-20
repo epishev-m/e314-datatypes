@@ -1,7 +1,10 @@
 {
     "name": "EM.DataTypes",
     "rootNamespace": "EM.DataTypes",
-    "references": [],
+    "references": [
+        "EM.Protect",
+        "EM.Exceptions"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

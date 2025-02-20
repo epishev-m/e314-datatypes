@@ -2,7 +2,8 @@
     "name": "EM.DataTypes.Tests",
     "rootNamespace": "EM.DataTypes.Tests",
     "references": [
-        "EM.DataTypes"
+        "EM.DataTypes",
+        "EM.Exceptions"
     ],
     "includePlatforms": [
         "Editor"
