@@ -20,6 +20,9 @@
       <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\CapacityStrategyTests.cs">
         <Link>Tests\CapacityStrategyTests.cs</Link>
       </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\FastListTests.cs">
+        <Link>Tests\FastListTests.cs</Link>
+      </Compile>
     </ItemGroup>
 
 </Project>
