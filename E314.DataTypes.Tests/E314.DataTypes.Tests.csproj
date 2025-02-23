@@ -17,9 +17,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\">
-        <Link>Tests</Link>
-      </Folder>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\CapacityStrategyTests.cs">
+        <Link>Tests\CapacityStrategyTests.cs</Link>
+      </Compile>
     </ItemGroup>
 
 </Project>
