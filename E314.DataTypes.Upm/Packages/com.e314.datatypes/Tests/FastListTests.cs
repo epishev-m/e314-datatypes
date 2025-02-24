@@ -6,7 +6,7 @@ namespace E314.DataTypes.Tests
 {
 
 [TestFixture]
-public class FastListTests
+internal sealed class FastListTests
 {
 	private FastList<int> _list;
 

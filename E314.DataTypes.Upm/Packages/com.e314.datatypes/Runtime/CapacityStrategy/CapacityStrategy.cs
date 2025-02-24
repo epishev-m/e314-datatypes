@@ -46,9 +46,9 @@ public sealed class CapacityStrategy : ICapacityStrategy
     {
         if (currentCapacity >= requiredSize) return currentCapacity;
 
-        foreach (int t in CapacitySizes)
+        foreach (var capacity in CapacitySizes)
         {
-            if (t >= requiredSize) return t;
+            if (capacity >= requiredSize) return capacity;
         }
 
         throw new InvOpException("Required capacity is too large.",

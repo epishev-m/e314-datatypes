@@ -5,7 +5,7 @@ namespace E314.DataTypes.Tests
 {
 
 [TestFixture]
-public class CapacityStrategyTests
+internal sealed class CapacityStrategyTests
 {
 	private readonly CapacityStrategy _strategy = new();
 
