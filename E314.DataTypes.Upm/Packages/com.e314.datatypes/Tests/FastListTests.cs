@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using E314.Exceptions;
 using NUnit.Framework;
 
@@ -153,14 +154,27 @@ internal sealed class FastListTests
 	public void Dispose_ReleasesResources()
 	{
 		// Arrange
-		_list.Add(10);
+		var list = new FastList<TestDisposable>();
+		var disposableValue = new TestDisposable();
+		list.Add(disposableValue);
 
 		// Act
-		_list.Dispose();
+		list.Dispose();
 
 		// Assert
-		Assert.That(_list.Count, Is.EqualTo(0));
-		Assert.That(_list.Capacity, Is.EqualTo(0));
+		Assert.That(list.Count, Is.EqualTo(0));
+		Assert.That(list.Capacity, Is.EqualTo(0));
+		Assert.That(disposableValue.IsDisposed, Is.True);
+	}
+
+	private sealed class TestDisposable : IDisposable
+	{
+		public bool IsDisposed { get; private set; }
+
+		public void Dispose()
+		{
+			IsDisposed = true;
+		}
 	}
 }
 

@@ -3,7 +3,6 @@ using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using E314.Protect;
 
 namespace E314.DataTypes
@@ -11,20 +10,16 @@ namespace E314.DataTypes
 
 /// <summary>
 /// A high-performance list implementation that uses pooled arrays for efficient memory management.
-/// Implements <see cref="IEnumerable{T}"/> and <see cref="IDisposable"/>.
+/// Implements <see cref="IReadOnlyList{T}"/> and <see cref="IDisposable"/>.
 /// </summary>
 /// <typeparam name="T">The type of elements in the list.</typeparam>
-public class FastList<T> : IEnumerable<T>, IDisposable
+public class FastList<T> : IReadOnlyList<T>, IDisposable
 {
 	private static readonly ArrayPool<T> ArrayPool = ArrayPool<T>.Shared;
 	private readonly ICapacityStrategy _capacityStrategy;
 	private T[] _items;
 	private int _count;
 	private int _capacity;
-
-	public int Count => _count;
-
-	public int Capacity => _capacity;
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="FastList{T}"/> class with the specified initial capacity and capacity strategy.
@@ -41,6 +36,10 @@ public class FastList<T> : IEnumerable<T>, IDisposable
 		_count = 0;
 	}
 
+	public int Count => _count;
+
+	public int Capacity => _capacity;
+
 	/// <summary>
 	/// Adds an element to the end of the list.
 	/// </summary>
@@ -48,7 +47,7 @@ public class FastList<T> : IEnumerable<T>, IDisposable
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public void Add(T item)
 	{
-		int capacity = _capacityStrategy.CalculateCapacity(_capacity, _count + 1);
+		var capacity = _capacityStrategy.CalculateCapacity(_capacity, _count + 1);
 		if (_count == _capacity) Resize(capacity);
 		_items[_count++] = item;
 	}
@@ -103,7 +102,7 @@ public class FastList<T> : IEnumerable<T>, IDisposable
 	/// <param name="newSize">The new size of the internal array.</param>
 	private void Resize(int newSize)
 	{
-		T[] newArray = ArrayPool.Rent(newSize);
+		var newArray = ArrayPool.Rent(newSize);
 		Array.Copy(_items, newArray, _count);
 		ArrayPool.Return(_items, clearArray: true);
 		_items = newArray;
@@ -115,6 +114,7 @@ public class FastList<T> : IEnumerable<T>, IDisposable
 	/// </summary>
 	public void Dispose()
 	{
+		foreach (var item in _items) Dispose(item);
 		ArrayPool.Return(_items, clearArray: true);
 		_items = Array.Empty<T>();
 		_capacity = 0;
@@ -127,13 +127,19 @@ public class FastList<T> : IEnumerable<T>, IDisposable
 	/// </summary>
 	/// <returns>An enumerator for the list.</returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public Enumerator GetEnumerator() => new Enumerator(this);
+	public Enumerator GetEnumerator() => new(this);
 
 	/// <inheritdoc cref="IEnumerable{T}.GetEnumerator"/>
 	IEnumerator<T> IEnumerable<T>.GetEnumerator() => new Enumerator(this);
 
 	/// <inheritdoc cref="IEnumerable.GetEnumerator"/>
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	private static void Dispose(T value)
+	{
+		if (value is IDisposable disposable) disposable.Dispose();
+	}
 
 	/// <summary>
 	/// Enumerates the elements of a <see cref="FastList{T}"/>.
@@ -142,7 +148,6 @@ public class FastList<T> : IEnumerable<T>, IDisposable
 	{
 		private readonly FastList<T> _list;
 		private int _index;
-		private T _current;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Enumerator"/> struct.
@@ -153,15 +158,15 @@ public class FastList<T> : IEnumerable<T>, IDisposable
 		{
 			_list = list;
 			_index = 0;
-			_current = default;
+			Current = default;
 		}
 
 		/// <summary>
 		/// Gets the element at the current position of the enumerator.
 		/// </summary>
-		public T Current => _current;
+		public T Current { get; private set; }
 
-		object IEnumerator.Current => _current;
+		object IEnumerator.Current => Current;
 
 		/// <summary>
 		/// Advances the enumerator to the next element of the list.
@@ -171,7 +176,7 @@ public class FastList<T> : IEnumerable<T>, IDisposable
 		public bool MoveNext()
 		{
 			if ((uint)_index >= (uint)_list._count) return false;
-			_current = _list._items[_index++];
+			Current = _list._items[_index++];
 			return true;
 		}
 
