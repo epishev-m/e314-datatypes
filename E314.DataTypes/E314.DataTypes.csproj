@@ -24,6 +24,18 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\Binder\Binder.cs">
+        <Link>Runtime\Binder\Binder.cs</Link>
+      </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\Binder\Binding.cs">
+        <Link>Runtime\Binder\Binding.cs</Link>
+      </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\Binder\IBinder.cs">
+        <Link>Runtime\Binder\IBinder.cs</Link>
+      </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\Binder\IBinding.cs">
+        <Link>Runtime\Binder\IBinding.cs</Link>
+      </Compile>
       <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\CapacityStrategy\CapacityStrategy.cs">
         <Link>Runtime\CapacityStrategy\CapacityStrategy.cs</Link>
       </Compile>
@@ -36,8 +48,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="E314.Exceptions" Version="1.0.0" />
-      <PackageReference Include="E314.Protect" Version="2.0.0" />
+      <PackageReference Include="E314.Exceptions" Version="1.1.0" />
+      <PackageReference Include="E314.Protect" Version="2.1.0" />
     </ItemGroup>
 
 </Project>

@@ -17,6 +17,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\Binder\BinderTests.cs">
+        <Link>Tests\Binder\BinderTests.cs</Link>
+      </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\Binder\BindingTests.cs">
+        <Link>Tests\Binder\BindingTests.cs</Link>
+      </Compile>
       <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\CapacityStrategyTests.cs">
         <Link>Tests\CapacityStrategyTests.cs</Link>
       </Compile>
