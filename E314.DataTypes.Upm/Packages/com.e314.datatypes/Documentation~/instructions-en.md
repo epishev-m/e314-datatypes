@@ -19,6 +19,18 @@ The `E314.DataTypes` module provides structures and data types.
     - [Key Features](#key-features)
     - [Recommendations](#recommendations-2)
     - [Usage Example](#usage-example-2)
+  - [InstanceProvider](#instanceprovider)
+    - [Recommendations](#recommendations-3)
+    - [Usage Example](#usage-example-3)
+  - [SingletonInstanceProvider](#singletoninstanceprovider)
+    - [Recommendations](#recommendations-4)
+    - [Usage Example](#usage-example-4)
+  - [ListInstanceProvider](#listinstanceprovider)
+    - [Recommendations](#recommendations-5)
+    - [Usage Example](#usage-example-5)
+  - [FactoryInstanceProvider](#factoryinstanceprovider)
+    - [Recommendations](#recommendations-6)
+    - [Usage Example](#usage-example-6)
 
 ## CapacityStrategy
 
@@ -121,4 +133,89 @@ var binding = binder.GetBinding("Key1");
 bool isUnbound = binder.Unbind("Key1");
 
 binder.Dispose();
+```
+
+## InstanceProvider
+
+`InstanceProvider` is designed to manage a single instance of an object.
+It ensures that the instance will be properly disposed of if it implements the `IDisposable` interface.
+
+### Recommendations
+
+- Use when you need to ensure that an object will be correctly disposed of after use.
+- Suitable for managing existing objects.
+- Ensure that the passed object is not `null`, as this will throw an exception.
+
+### Usage Example
+
+``` csharp
+var disposableObject = new DisposableResource();
+using var provider = new InstanceProvider(disposableObject);
+var instance = provider.GetInstance();
+// ...
+```
+
+## SingletonInstanceProvider
+
+`SingletonInstanceProvider` ensures the creation and management of a single instance of an object (Singleton pattern).
+The instance is created only on the first request and reused in subsequent calls.
+
+### Recommendations
+
+- Use when you need to ensure that only one instance of an object exists in the system.
+- Suitable for managing global resources such as configurations, loggers, or services.
+- Ensure that the passed instance provider (`IInstanceProvider`) is not `null`.
+
+### Usage Example
+
+``` csharp
+var mockProvider = new MockInstanceProvider(new object());
+using var singletonProvider = new SingletonInstanceProvider(mockProvider);
+var instance1 = singletonProvider.GetInstance();
+var instance2 = singletonProvider.GetInstance();
+// instance1 and instance2 will be the same object
+```
+
+## ListInstanceProvider
+
+`ListInstanceProvider` creates and manages a list of instances, each provided by a separate provider.
+The list is created dynamically based on the specified type.
+
+### Recommendations
+
+- Use when you need to combine multiple instances into a collection, such as for managing a list of dependencies or services.
+- Ensure that the collection of providers is not empty and does not contain `null`.
+- Specify the correct type of list elements to avoid errors during collection creation.
+
+### Usage Example
+
+``` csharp
+var providers = new List<IInstanceProvider>
+{
+    new MockInstanceProvider(new object()),
+    new MockInstanceProvider(new object())
+};
+using var listProvider = new ListInstanceProvider(providers, typeof(object));
+var list = (IList)listProvider.GetInstance();
+// ...
+```
+
+## FactoryInstanceProvider
+
+`FactoryInstanceProvider` manages the creation of instances via a factory.
+The factory is initialized only on the first instance request.
+
+### Recommendations
+
+- Use when you need to create instances "on the fly" using a factory.
+- Suitable for scenarios where objects are created dynamically, such as depending on the system state.
+- Ensure that the factory implements the `IFactory` interface and correctly creates instances.
+
+### Usage Example
+
+``` csharp
+var factoryProvider = new MockInstanceProvider(new MockFactory());
+using var provider = new FactoryInstanceProvider(factoryProvider);
+var instance = provider.GetInstance();
+// ...
 ```

@@ -45,6 +45,24 @@
       <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\Collections\FastList.cs">
         <Link>Runtime\Collections\FastList.cs</Link>
       </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\InstanceProvider\FactoryInstanceProvider.cs">
+        <Link>Runtime\InstanceProvider\FactoryInstanceProvider.cs</Link>
+      </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\InstanceProvider\IInstanceProvider.cs">
+        <Link>Runtime\InstanceProvider\IInstanceProvider.cs</Link>
+      </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\InstanceProvider\InstanceProvider.cs">
+        <Link>Runtime\InstanceProvider\InstanceProvider.cs</Link>
+      </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\InstanceProvider\ListInstanceProvider.cs">
+        <Link>Runtime\InstanceProvider\ListInstanceProvider.cs</Link>
+      </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\InstanceProvider\SingletonInstanceProvider.cs">
+        <Link>Runtime\InstanceProvider\SingletonInstanceProvider.cs</Link>
+      </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\Interfaces\IFactory.cs">
+        <Link>Runtime\Interfaces\IFactory.cs</Link>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

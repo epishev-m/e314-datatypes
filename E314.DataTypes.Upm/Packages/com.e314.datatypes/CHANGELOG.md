@@ -12,3 +12,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CapacityStrategy: A strategy for managing the capacity of collections.
 - FastList: A high-performance list implementation.
 - Binder: Module for managing relationships between keys and values.
+- InstanceProvider: The module provides a set of classes for managing the lifecycle of object instances.

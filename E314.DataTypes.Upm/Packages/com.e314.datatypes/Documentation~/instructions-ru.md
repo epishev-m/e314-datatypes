@@ -19,6 +19,18 @@
     - [Основные возможности](#основные-возможности)
     - [Рекомендации](#рекомендации-2)
     - [Пример использования](#пример-использования-2)
+  - [InstanceProvider](#instanceprovider)
+    - [Рекомендации](#рекомендации-3)
+    - [Пример использования](#пример-использования-3)
+  - [SingletonInstanceProvider](#singletoninstanceprovider)
+    - [Рекомендации](#рекомендации-4)
+    - [Пример использования](#пример-использования-4)
+  - [ListInstanceProvider](#listinstanceprovider)
+    - [Рекомендации](#рекомендации-5)
+    - [Пример использования](#пример-использования-5)
+  - [FactoryInstanceProvider](#factoryinstanceprovider)
+    - [Рекомендации](#рекомендации-6)
+    - [Пример использования](#пример-использования-6)
 
 ## CapacityStrategy
 
@@ -121,4 +133,89 @@ var binding = binder.GetBinding("Key1");
 bool isUnbound = binder.Unbind("Key1");
 
 binder.Dispose();
+```
+
+## InstanceProvider
+
+`InstanceProvider` предназначен для управления одиночным экземпляром объекта.
+Он гарантирует, что экземпляр будет корректно освобожден, если он реализует интерфейс `IDisposable`.
+
+### Рекомендации
+
+- Используйте, когда нужно гарантировать, что объект будет правильно освобожден после использования.
+- Подходит для управления существующим объектом.
+- Убедитесь, что передаваемый объект не является `null`, так как это вызовет исключение.
+
+### Пример использования
+
+``` csharp
+var disposableObject = new DisposableResource();
+using var provider = new InstanceProvider(disposableObject);
+var instance = provider.GetInstance();
+// ...
+```
+
+## SingletonInstanceProvider
+
+`SingletonInstanceProvider` обеспечивает создание и управление единственным экземпляром объекта (паттерн Singleton).
+Экземпляр создается только при первом запросе и повторно используется в последующих вызовах.
+
+### Рекомендации
+
+- Используйте, когда требуется гарантировать, что в системе существует только один экземпляр объекта.
+- Подходит для управления глобальными ресурсами, такими как конфигурации, логгеры или сервисы.
+- Убедитесь, что передаваемый провайдер экземпляров (`IInstanceProvider`) не является `null`.
+
+### Пример использования
+
+``` csharp
+var mockProvider = new MockInstanceProvider(new object());
+using var singletonProvider = new SingletonInstanceProvider(mockProvider);
+var instance1 = singletonProvider.GetInstance();
+var instance2 = singletonProvider.GetInstance();
+// instance1 и instance2 будут одним и тем же объектом
+```
+
+## ListInstanceProvider
+
+`ListInstanceProvider` создает и управляет списком экземпляров, каждый из которых предоставляется отдельным провайдером.
+Список создается динамически на основе указанного типа.
+
+### Рекомендации
+
+- Используйте, когда требуется объединить несколько экземпляров в коллекцию, например, для управления списком зависимостей или сервисов.
+- Убедитесь, что коллекция провайдеров не пуста и не содержит `null`.
+- Указывайте правильный тип элементов списка, чтобы избежать ошибок при создании коллекции.
+
+### Пример использования
+
+``` csharp
+var providers = new List<IInstanceProvider>
+{
+    new MockInstanceProvider(new object()),
+    new MockInstanceProvider(new object())
+};
+using var listProvider = new ListInstanceProvider(providers, typeof(object));
+var list = (IList)listProvider.GetInstance();
+// ...
+```
+
+## FactoryInstanceProvider
+
+`FactoryInstanceProvider` управляет созданием экземпляров через фабрику.
+Фабрика инициализируется только при первом запросе экземпляра.
+
+### Рекомендации
+
+- Используйте, когда требуется создавать экземпляры "на лету" с помощью фабрики.
+- Подходит для сценариев, где объекты создаются динамически, например, в зависимости от состояния системы.
+- Убедитесь, что фабрика реализует интерфейс `IFactory` и правильно создает экземпляры.
+
+### Пример использования
+
+``` csharp
+var factoryProvider = new MockInstanceProvider(new MockFactory());
+using var provider = new FactoryInstanceProvider(factoryProvider);
+var instance = provider.GetInstance();
+// ...
 ```
