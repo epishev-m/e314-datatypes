@@ -31,6 +31,16 @@ The `E314.DataTypes` module provides structures and data types.
   - [FactoryInstanceProvider](#factoryinstanceprovider)
     - [Recommendations](#recommendations-6)
     - [Usage Example](#usage-example-6)
+  - [TypeAnalyzer](#typeanalyzer)
+    - [How to Use](#how-to-use)
+      - [Analyzing a Type](#analyzing-a-type)
+      - [Using Flags](#using-flags)
+      - [Working with Results](#working-with-results)
+      - [Caching](#caching)
+    - [Recommendations](#recommendations-7)
+    - [Usage Examples](#usage-examples)
+      - [Full Type Analysis](#full-type-analysis)
+      - [Selective Analysis](#selective-analysis)
 
 ## CapacityStrategy
 
@@ -218,4 +228,123 @@ var factoryProvider = new MockInstanceProvider(new MockFactory());
 using var provider = new FactoryInstanceProvider(factoryProvider);
 var instance = provider.GetInstance();
 // ...
+```
+
+## TypeAnalyzer
+
+`TypeAnalyzer` is a tool for analyzing the structure of types.
+It provides the ability to extract information about constructors, methods, properties, and fields of a given type.
+This tool is useful when working with reflection, allowing you to dynamically inspect types at runtime.
+
+### How to Use
+
+`TypeAnalyzer` is used for:
+
+- Inspecting types: Retrieving information about the structure of a class or structure.
+- Filtering data: Selectively extracting only those elements of a type that are needed (e.g., only methods or only properties).
+- Caching results: Optimizing performance by caching analysis results.
+
+#### Analyzing a Type
+
+To analyze a type, use the `Analyze` method of the `ITypeAnalyzer` interface. The method takes two parameters:
+
+- `type`: The type to analyze.
+- `flags`: Flags that determine which elements of the type to extract (constructors, methods, properties, fields).
+
+``` csharp
+var analyzer = new TypeAnalyzer();
+var result = analyzer.Analyze(typeof(MyClass), TypeAnalysisFlags.Methods | TypeAnalysisFlags.Properties);
+```
+
+In this example, only the methods and properties of the `MyClass` type will be extracted.
+
+#### Using Flags
+
+The `TypeAnalysisFlags` flags allow flexible configuration of the analysis:
+
+- `Constructors`: Extracts the constructors of the type.
+- `Methods`: Extracts the methods of the type.
+- `Properties`: Extracts the properties of the type.
+- `Fields`: Extracts the fields of the type.
+- `All`: Extracts all elements of the type.
+
+If you need only specific elements, combine the flags using the | operator:
+
+``` csharp
+var flags = TypeAnalysisFlags.Constructors | TypeAnalysisFlags.Fields;
+var result = analyzer.Analyze(typeof(MyClass), flags);
+```
+
+#### Working with Results
+
+The analysis result is returned as a `TypeAnalysisResult` object, which contains collections:
+
+- `Constructors`: A list of constructors.
+- `Methods`: A list of methods.
+- `Properties`: A list of properties.
+- `Fields`: A list of fields.
+
+These collections can be used for further processing. For example:
+
+``` csharp
+foreach (var method in result.Methods)
+{
+    Console.WriteLine($"Method: {method.Name}");
+}
+```
+
+#### Caching
+
+`TypeAnalyzer` automatically caches analysis results for each type.
+This avoids re-analyzing the same type, improving performance.
+If you need to clear the cache (e.g., during testing), you can do so via reflection:
+
+``` csharp
+typeof(TypeAnalyzer)
+    .GetField("Cache", BindingFlags.Static | BindingFlags.NonPublic)?
+    .SetValue(null, new Dictionary<Type, TypeAnalysisResult>());
+```
+
+### Recommendations
+
+- Performance Optimization
+  - Use the minimal set of flags to extract only the data you actually need.
+  - If you work with the same type multiple times, rely on caching to avoid redundant computations.
+- Handling Empty Types
+  - If the analyzed type contains no elements (e.g., an empty class), the corresponding collections in `TypeAnalysisResult` will be empty. Ensure your code handles such cases correctly.
+- Input Validation
+  - Before calling the `Analyze` method, ensure the passed type is not `null`. Otherwise, an `ArgNullException` will be thrown.
+- Testing
+  - Clear the cache before each test to avoid the influence of previous runs.
+  - Test both positive scenarios (types with various elements) and negative scenarios (empty types, invalid flags).
+
+### Usage Examples
+
+#### Full Type Analysis
+
+``` csharp
+var analyzer = new TypeAnalyzer();
+var result = analyzer.Analyze(typeof(MyClass), TypeAnalysisFlags.All);
+Console.WriteLine("Constructors:");
+foreach (var ctor in result.Constructors)
+{
+    Console.WriteLine(ctor.Name);
+}
+Console.WriteLine("Methods:");
+foreach (var method in result.Methods)
+{
+    Console.WriteLine(method.Name);
+}
+```
+
+#### Selective Analysis
+
+``` csharp
+var analyzer = new TypeAnalyzer();
+var result = analyzer.Analyze(typeof(MyClass), TypeAnalysisFlags.Properties);
+Console.WriteLine("Properties:");
+foreach (var property in result.Properties)
+{
+    Console.WriteLine(property.Name);
+}
 ```

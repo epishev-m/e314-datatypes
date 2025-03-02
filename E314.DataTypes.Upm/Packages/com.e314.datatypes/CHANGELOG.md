@@ -13,3 +13,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - FastList: A high-performance list implementation.
 - Binder: Module for managing relationships between keys and values.
 - InstanceProvider: The module provides a set of classes for managing the lifecycle of object instances.
+- TypeAnalyzer: A tool for analyzing the structure of types.

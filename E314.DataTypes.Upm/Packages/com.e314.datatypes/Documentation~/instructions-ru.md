@@ -31,6 +31,15 @@
   - [FactoryInstanceProvider](#factoryinstanceprovider)
     - [Рекомендации](#рекомендации-6)
     - [Пример использования](#пример-использования-6)
+  - [TypeAnalyzer](#typeanalyzer)
+    - [Как использовать](#как-использовать)
+      - [Анализ типа](#анализ-типа)
+      - [Использование флагов](#использование-флагов)
+      - [Работа с результатами](#работа-с-результатами)
+      - [Кэширование](#кэширование)
+    - [Рекомендации](#рекомендации-7)
+    - [Пример использования](#пример-использования-7)
+      - [Полный анализ типа](#полный-анализ-типа)
 
 ## CapacityStrategy
 
@@ -218,4 +227,127 @@ var factoryProvider = new MockInstanceProvider(new MockFactory());
 using var provider = new FactoryInstanceProvider(factoryProvider);
 var instance = provider.GetInstance();
 // ...
+```
+
+## TypeAnalyzer
+
+`TypeAnalyzer` — это инструмент для анализа структуры типов.
+Он предоставляет возможность извлекать информацию о конструкторах, методах, свойствах и полях заданного типа.
+Этот инструмент полезен при работе с рефлексией, когда требуется динамически исследовать типы во время выполнения.
+
+### Как использовать
+
+`TypeAnalyzer` используется для:
+
+- Инспекции типов : Получение информации о структуре класса или структуры.
+- Фильтрации данных : Выборочное извлечение только тех элементов типа, которые необходимы (например, только методы или только свойства).
+- Кэширования результатов : Оптимизация производительности за счет кэширования результатов анализа.
+
+#### Анализ типа
+
+Для анализа типа используйте метод Analyze интерфейса ITypeAnalyzer. Метод принимает два параметра:
+
+- `type`: Тип, который нужно проанализировать.
+- `flags`: Флаги, определяющие, какие элементы типа следует извлечь (конструкторы, методы, свойства, поля).
+
+``` csharp
+var analyzer = new TypeAnalyzer();
+var result = analyzer.Analyze(typeof(MyClass), TypeAnalysisFlags.Methods | TypeAnalysisFlags.Properties);
+```
+
+В этом примере будут извлечены только методы и свойства типа `MyClass`.
+
+#### Использование флагов
+
+Флаги `TypeAnalysisFlags` позволяют гибко настраивать анализ:
+
+- `Constructors`: Извлекает конструкторы типа.
+- `Methods`: Извлекает методы типа.
+- `Properties`: Извлекает свойства типа.
+- `Fields`: Извлекает поля типа.
+- `All`: Извлекает все элементы типа.
+
+Если вам нужны только определенные элементы, комбинируйте флаги с помощью оператора |:
+
+``` csharp
+var flags = TypeAnalysisFlags.Constructors | TypeAnalysisFlags.Fields;
+var result = analyzer.Analyze(typeof(MyClass), flags);
+```
+
+#### Работа с результатами
+
+Результат анализа возвращается в виде объекта `TypeAnalysisResult`, который содержит коллекции:
+
+- `Constructors`: Список конструкторов.
+- `Methods`: Список методов.
+- `Properties`: Список свойств.
+- `Fields`: Список полей.
+
+Эти коллекции можно использовать для дальнейшей обработки. Например:
+
+``` csharp
+foreach (var method in result.Methods)
+{
+    Console.WriteLine($"Method: {method.Name}");
+}
+```
+
+#### Кэширование
+
+`TypeAnalyzer` автоматически кэширует результаты анализа для каждого типа.
+Это позволяет избежать повторного анализа одного и того же типа, что повышает производительность.
+
+Если вам нужно очистить кэш (например, при тестировании), вы можете сделать это через рефлексию:
+
+``` csharp
+typeof(TypeAnalyzer)
+    .GetField("Cache", BindingFlags.Static | BindingFlags.NonPublic)?
+    .SetValue(null, new Dictionary<Type, TypeAnalysisResult>());
+```
+
+### Рекомендации
+
+- Оптимизация производительности
+  - Используйте минимальный набор флагов, чтобы извлекать только те данные, которые действительно нужны.
+  - Если вы работаете с одним и тем же типом несколько раз, полагайтесь на кэширование, чтобы избежать лишних вычислений.
+- Обработка пустых типов
+  - Если анализируемый тип не содержит элементов (например, пустой класс), соответствующие коллекции в `TypeAnalysisResult` будут пустыми. Убедитесь, что ваш код корректно обрабатывает такие случаи.
+- Проверка входных данных
+  - Перед вызовом метода `Analyze` убедитесь, что передаваемый тип не равен `null`. В противном случае будет выброшено исключение `ArgNullException`.
+- Тестирование
+  - Очищайте кэш перед каждым тестом, чтобы избежать влияния предыдущих запусков.
+  - Проверяйте как положительные сценарии (тип с различными элементами), так и отрицательные (пустой тип, неверные флаги).
+
+### Пример использования
+
+#### Полный анализ типа
+
+``` csharp
+var analyzer = new TypeAnalyzer();
+var result = analyzer.Analyze(typeof(MyClass), TypeAnalysisFlags.All);
+
+Console.WriteLine("Constructors:");
+foreach (var ctor in result.Constructors)
+{
+    Console.WriteLine(ctor.Name);
+}
+
+Console.WriteLine("Methods:");
+foreach (var method in result.Methods)
+{
+    Console.WriteLine(method.Name);
+}
+``
+
+#### Выборочный анализ
+
+``` csharp
+var analyzer = new TypeAnalyzer();
+var result = analyzer.Analyze(typeof(MyClass), TypeAnalysisFlags.Properties);
+
+Console.WriteLine("Properties:");
+foreach (var property in result.Properties)
+{
+    Console.WriteLine(property.Name);
+}
 ```

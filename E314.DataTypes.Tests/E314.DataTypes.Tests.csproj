@@ -41,6 +41,9 @@
       <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\InstanceProvider\SingletonInstanceProviderTests.cs">
         <Link>Tests\InstanceProvider\SingletonInstanceProviderTests.cs</Link>
       </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\TypeAnalyzerTests.cs">
+        <Link>Tests\TypeAnalyzerTests.cs</Link>
+      </Compile>
     </ItemGroup>
 
 </Project>

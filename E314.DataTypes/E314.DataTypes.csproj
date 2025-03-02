@@ -63,6 +63,18 @@
       <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\Interfaces\IFactory.cs">
         <Link>Runtime\Interfaces\IFactory.cs</Link>
       </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\TypeAnalyzer\TypeAnalysisFlags.cs">
+        <Link>Runtime\TypeAnalyzer\TypeAnalysisFlags.cs</Link>
+      </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\TypeAnalyzer\TypeAnalysisResult.cs">
+        <Link>Runtime\TypeAnalyzer\TypeAnalysisResult.cs</Link>
+      </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\TypeAnalyzer\TypeAnalyzer.cs">
+        <Link>Runtime\TypeAnalyzer\TypeAnalyzer.cs</Link>
+      </Compile>
+      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Runtime\TypeAnalyzer\ITypeAnalyzer.cs">
+        <Link>Runtime\TypeAnalyzer\ITypeAnalyzer.cs</Link>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
