@@ -15,7 +15,10 @@ public class Binder<TKey, TValue> : IBinder<TKey, TValue>
 	where TKey : class
 	where TValue : class
 {
-	private readonly ICapacityStrategy _capacityStrategy;
+	/// <summary>
+	/// A strategy for managing the capacity of the list.
+	/// </summary>
+	protected readonly ICapacityStrategy CapacityStrategy;
 	private readonly Dictionary<TKey, IBinding<TKey, TValue>> _bindings;
 	private bool _isDisposed;
 
@@ -25,13 +28,18 @@ public class Binder<TKey, TValue> : IBinder<TKey, TValue>
 	/// <param name="capacity">The initial capacity of the internal dictionary.</param>
 	/// <param name="capacityStrategy">The strategy for managing the capacity of the internal dictionary. Must not be null.</param>
 	/// <exception cref="E314.Exceptions.ArgNullException">Thrown if <paramref name="capacityStrategy"/> is null.</exception>
-	public Binder(int capacity, ICapacityStrategy capacityStrategy)
+	public Binder(ICapacityStrategy capacityStrategy, int capacity)
 	{
 		Requires.NotNull(capacityStrategy, nameof(capacityStrategy));
-		_capacityStrategy = capacityStrategy;
-		capacity = _capacityStrategy.CalculateCapacity(0, capacity);
+		CapacityStrategy = capacityStrategy;
+		capacity = CapacityStrategy.CalculateCapacity(0, capacity);
 		_bindings = new Dictionary<TKey, IBinding<TKey, TValue>>(capacity);
 	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	protected bool IsDisposed => _isDisposed;
 
 	/// <summary>
 	/// Creates or retrieves an existing binding for the specified key.
@@ -96,7 +104,7 @@ public class Binder<TKey, TValue> : IBinder<TKey, TValue>
 	/// <returns>A new <see cref="IBinding{TKey, TValue}"/> instance associated with the key.</returns>
 	protected virtual IBinding<TKey, TValue> GetRawBinding(TKey key)
 	{
-		return new Binding<TKey, TValue>(_capacityStrategy, key);
+		return new Binding<TKey, TValue>(CapacityStrategy, key);
 	}
 }
 

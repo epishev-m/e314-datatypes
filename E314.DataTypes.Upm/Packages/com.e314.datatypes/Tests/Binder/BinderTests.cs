@@ -20,7 +20,7 @@ internal sealed class BinderTests
 	public void Constructor_InitializesWithValidParameters()
 	{
 		// Arrange & Act
-		var binder = new Binder<string, string>(10, _capacityStrategy);
+		var binder = new Binder<string, string>(_capacityStrategy, 10);
 
 		// Assert
 		Assert.That(binder, Is.Not.Null);
@@ -29,8 +29,8 @@ internal sealed class BinderTests
 	[Test]
 	public void Constructor_ThrowsExceptionForNullCapacityStrategy()
 	{
-		// Arrange & Act & Assert
-		Assert.Throws<ArgNullException>(() => _ = new Binder<string, string>(10, null));
+		// Act & Assert
+		Assert.Throws<ArgNullException>(() => _ = new Binder<string, string>(null, 10));
 	}
 
 	[Test]
@@ -38,7 +38,7 @@ internal sealed class BinderTests
 	{
 		// Arrange
 		const string key = "TestKey";
-		var binder = new Binder<string, string>(10, _capacityStrategy);
+		var binder = new Binder<string, string>(_capacityStrategy, 10);
 
 		// Act
 		var binding = binder.Bind(key);
@@ -53,7 +53,7 @@ internal sealed class BinderTests
 	{
 		// Arrange
 		const string key = "TestKey";
-		var binder = new Binder<string, string>(10, _capacityStrategy);
+		var binder = new Binder<string, string>(_capacityStrategy, 10);
 		var firstBinding = binder.Bind(key);
 
 		// Act
@@ -68,7 +68,7 @@ internal sealed class BinderTests
 	{
 		// Arrange
 		const string key = "TestKey";
-		var binder = new Binder<string, string>(10, _capacityStrategy);
+		var binder = new Binder<string, string>(_capacityStrategy, 10);
 		binder.Bind(key);
 
 		// Act
@@ -84,7 +84,7 @@ internal sealed class BinderTests
 	{
 		// Arrange
 		const string key = "NonExistentKey";
-		var binder = new Binder<string, string>(10, _capacityStrategy);
+		var binder = new Binder<string, string>(_capacityStrategy, 10);
 
 		// Act
 		var result = binder.Unbind(key);
@@ -98,7 +98,7 @@ internal sealed class BinderTests
 	{
 		// Arrange
 		const string key = "TestKey";
-		var binder = new Binder<string, string>(10, _capacityStrategy);
+		var binder = new Binder<string, string>(_capacityStrategy, 10);
 		var binding = binder.Bind(key);
 
 		// Act
@@ -113,7 +113,7 @@ internal sealed class BinderTests
 	{
 		// Arrange
 		const string key = "NonExistentKey";
-		var binder = new Binder<string, string>(10, _capacityStrategy);
+		var binder = new Binder<string, string>(_capacityStrategy, 10);
 
 		// Act
 		var result = binder.GetBinding(key);
@@ -127,7 +127,7 @@ internal sealed class BinderTests
 	{
 		// Arrange
 		const string key = "TestKey";
-		var binder = new Binder<string, TestDisposable>(10, _capacityStrategy);
+		var binder = new Binder<string, TestDisposable>(_capacityStrategy, 10);
 		var disposableValue = new TestDisposable();
 		var binding = binder.Bind(key);
 		binding.To(disposableValue);
@@ -144,7 +144,7 @@ internal sealed class BinderTests
 	public void UseAfterDispose_ThrowsException()
 	{
 		// Arrange
-		var binder = new Binder<string, string>(10, _capacityStrategy);
+		var binder = new Binder<string, string>(_capacityStrategy, 10);
 		binder.Dispose();
 
 		// Act & Assert

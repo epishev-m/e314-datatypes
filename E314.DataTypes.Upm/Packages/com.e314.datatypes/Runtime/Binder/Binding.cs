@@ -17,7 +17,7 @@ public class Binding<TKey, TValue> : IBinding<TKey, TValue>
 	where TValue : class
 {
 	private readonly FastList<TValue> _values;
-	private bool _isDisposed;
+	protected bool IsDisposed;
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="Binding{TKey, TValue}"/> class with the specified capacity strategy and key.
@@ -57,7 +57,7 @@ public class Binding<TKey, TValue> : IBinding<TKey, TValue>
 	/// <exception cref="E314.Exceptions.ObjDisposedException">Thrown if `Dispose` has been called.</exception>
 	public IBinding<TKey, TValue> To(TValue value)
 	{
-		Requires.NotDisposed(_isDisposed);
+		Requires.NotDisposed(IsDisposed);
 		Requires.NotNull(value, nameof(value));
 		_values.Add(value);
 		return this;
@@ -68,7 +68,7 @@ public class Binding<TKey, TValue> : IBinding<TKey, TValue>
 	/// </summary>
 	public void ClearValues()
 	{
-		Requires.NotDisposed(_isDisposed);
+		Requires.NotDisposed(IsDisposed);
 		_values.Clear();
 	}
 
@@ -78,7 +78,7 @@ public class Binding<TKey, TValue> : IBinding<TKey, TValue>
 	public void Dispose()
 	{
 		_values.Dispose();
-		_isDisposed = true;
+		IsDisposed = true;
 		GC.SuppressFinalize(this);
 	}
 }
