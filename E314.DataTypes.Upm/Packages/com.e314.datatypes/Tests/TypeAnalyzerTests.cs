@@ -140,8 +140,9 @@ internal sealed class TypeAnalyzerTests
 		public int Field;
 		public string Property { get; set; }
 
-		public SampleClass()
+		public SampleClass(int field)
 		{
+			Field = field;
 		}
 
 		public void Method()
