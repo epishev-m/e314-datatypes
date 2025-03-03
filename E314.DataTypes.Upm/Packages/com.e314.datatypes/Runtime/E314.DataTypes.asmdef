@@ -1,9 +1,9 @@
 {
-    "name": "EM.DataTypes",
-    "rootNamespace": "EM.DataTypes",
+    "name": "E314.DataTypes",
+    "rootNamespace": "E314.DataTypes",
     "references": [
-        "EM.Protect",
-        "EM.Exceptions"
+        "E314.Protect",
+        "E314.Exceptions"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

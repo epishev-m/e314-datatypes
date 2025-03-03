@@ -1,9 +1,9 @@
 {
-    "name": "EM.DataTypes.Tests",
-    "rootNamespace": "EM.DataTypes.Tests",
+    "name": "E314.DataTypes.Tests",
+    "rootNamespace": "E314.DataTypes.Tests",
     "references": [
-        "EM.DataTypes",
-        "EM.Exceptions"
+        "E314.DataTypes",
+        "E314.Exceptions"
     ],
     "includePlatforms": [
         "Editor"

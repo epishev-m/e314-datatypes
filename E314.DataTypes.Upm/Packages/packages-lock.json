@@ -5,24 +5,22 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.e314.protect": "2.1.0"
+        "com.e314.protect": "2.1.1"
       }
     },
     "com.e314.exceptions": {
-      "version": "1.1.0",
+      "version": "1.1.2",
       "depth": 2,
       "source": "registry",
-      "dependencies": {
-        "com.unity.nuget.newtonsoft-json": "3.2.1"
-      },
+      "dependencies": {},
       "url": "https://package.openupm.com"
     },
     "com.e314.protect": {
-      "version": "2.1.0",
+      "version": "2.1.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.e314.exceptions": "1.1.0"
+        "com.e314.exceptions": "1.1.2"
       },
       "url": "https://package.openupm.com"
     },
@@ -40,13 +38,6 @@
       "dependencies": {
         "com.unity.ext.nunit": "1.0.6"
       },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.nuget.newtonsoft-json": {
-      "version": "3.2.1",
-      "depth": 3,
-      "source": "registry",
-      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
