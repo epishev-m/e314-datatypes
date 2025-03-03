@@ -4,10 +4,10 @@
 
 ## Installation
 
-- [Installation - RU](Docs/installation-ru.md)
-- [Installation - EN](Docs/installation-en.md)
+- [Installation - RU](E314.DataTypes.Upm/Packages/com.e314.datatypes/Documentation~/installation-ru.md)
+- [Installation - EN](E314.DataTypes.Upm/Packages/com.e314.datatypes/Documentation~/installation-en.md)
 
 ## Instructions
 
-- [Instructions - RU](Docs/instructions-ru.md)
-- [Instructions - EN](Docs/instructions-en.md)
+- [Instructions - RU](E314.DataTypes.Upm/Packages/com.e314.datatypes/Documentation~/instructions-ru.md)
+- [Instructions - EN](E314.DataTypes.Upm/Packages/com.e314.datatypes/Documentation~/instructions-en.md)
