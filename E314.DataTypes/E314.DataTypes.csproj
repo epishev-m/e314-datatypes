@@ -9,7 +9,7 @@
         <Authors>Maksim Epishev (epishev.m@mail.ru)</Authors>
         <Copyright>Copyright (c) 2025 Maksim Epishev (epishev.m@mail.ru)</Copyright>
         <RepositoryType>Git</RepositoryType>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
         <PackageId>E314.DataTypes</PackageId>
         <RepositoryUrl>https://github.com/epishev-m/e314-datatypes.git</RepositoryUrl>
         <PackageProjectUrl>https://github.com/epishev-m/e314-datatypes</PackageProjectUrl>
@@ -17,22 +17,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>unity</PackageTags>
         <Description>The E314.DataTypes module provides structures and data types.</Description>
-        <PackageReleaseNotes>Changelog
-
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## [1.0.0] - 2025.02.03
-
-### Added
-
-- CapacityStrategy: A strategy for managing the capacity of collections.
-- FastList: A high-performance list implementation.
-- Binder: Module for managing relationships between keys and values.
-- InstanceProvider: The module provides a set of classes for managing the lifecycle of object instances.
-- TypeAnalyzer: A tool for analyzing the structure of types.</PackageReleaseNotes>
+        <PackageReleaseNotes>https://github.com/epishev-m/e314-datatypes/blob/master/E314.DataTypes.Upm/Packages/com.e314.datatypes/CHANGELOG.md</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
