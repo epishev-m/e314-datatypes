@@ -17,31 +17,31 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\Binder\BinderTests.cs">
+      <Compile Include="..\UPM\Tests\Binder\BinderTests.cs">
         <Link>Tests\Binder\BinderTests.cs</Link>
       </Compile>
-      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\Binder\BindingTests.cs">
+      <Compile Include="..\UPM\Tests\Binder\BindingTests.cs">
         <Link>Tests\Binder\BindingTests.cs</Link>
       </Compile>
-      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\CapacityStrategyTests.cs">
+      <Compile Include="..\UPM\Tests\CapacityStrategyTests.cs">
         <Link>Tests\CapacityStrategyTests.cs</Link>
       </Compile>
-      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\FastListTests.cs">
+      <Compile Include="..\UPM\Tests\FastListTests.cs">
         <Link>Tests\FastListTests.cs</Link>
       </Compile>
-      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\InstanceProvider\FactoryInstanceProviderTests.cs">
+      <Compile Include="..\UPM\Tests\InstanceProvider\FactoryInstanceProviderTests.cs">
         <Link>Tests\InstanceProvider\FactoryInstanceProviderTests.cs</Link>
       </Compile>
-      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\InstanceProvider\InstanceProviderTests.cs">
+      <Compile Include="..\UPM\Tests\InstanceProvider\InstanceProviderTests.cs">
         <Link>Tests\InstanceProvider\InstanceProviderTests.cs</Link>
       </Compile>
-      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\InstanceProvider\ListInstanceProviderTests.cs">
+      <Compile Include="..\UPM\Tests\InstanceProvider\ListInstanceProviderTests.cs">
         <Link>Tests\InstanceProvider\ListInstanceProviderTests.cs</Link>
       </Compile>
-      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\InstanceProvider\SingletonInstanceProviderTests.cs">
+      <Compile Include="..\UPM\Tests\InstanceProvider\SingletonInstanceProviderTests.cs">
         <Link>Tests\InstanceProvider\SingletonInstanceProviderTests.cs</Link>
       </Compile>
-      <Compile Include="..\E314.DataTypes.Upm\Packages\com.e314.datatypes\Tests\TypeAnalyzerTests.cs">
+      <Compile Include="..\UPM\Tests\TypeAnalyzerTests.cs">
         <Link>Tests\TypeAnalyzerTests.cs</Link>
       </Compile>
     </ItemGroup>

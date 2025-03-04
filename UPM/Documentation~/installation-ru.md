@@ -17,7 +17,7 @@
 ## Unity Package Manager. Git URL
 
 ```ps1
-https://github.com/epishev-m/e314-datatypes.git?path=E314.DataTypes.Upm/Packages/com.e314.datatypes/#release/1.0.1
+https://github.com/epishev-m/e314-datatypes.git?path=UPM/#release/1.0.1
 ```
 
 1. Открыть Window → Package Manager.

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.e314.datatypes": "file:../../UPM",
     "com.unity.ide.rider": "3.0.34",
     "com.unity.test-framework": "1.4.6"
   },

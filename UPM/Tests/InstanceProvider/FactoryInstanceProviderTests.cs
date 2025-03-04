@@ -1,5 +1,4 @@
-﻿using System;
-using E314.Exceptions;
+﻿using E314.Exceptions;
 using NUnit.Framework;
 
 namespace E314.DataTypes.Tests
