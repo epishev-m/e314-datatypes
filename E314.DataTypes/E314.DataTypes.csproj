@@ -47,6 +47,9 @@
       <Compile Include="..\UPM\Runtime\Collections\FastList.cs">
         <Link>Runtime\Collections\FastList.cs</Link>
       </Compile>
+      <Compile Include="..\UPM\Runtime\Factory\Factory.cs">
+        <Link>Runtime\Factory\Factory.cs</Link>
+      </Compile>
       <Compile Include="..\UPM\Runtime\InstanceProvider\FactoryInstanceProvider.cs">
         <Link>Runtime\InstanceProvider\FactoryInstanceProvider.cs</Link>
       </Compile>
@@ -62,7 +65,7 @@
       <Compile Include="..\UPM\Runtime\InstanceProvider\SingletonInstanceProvider.cs">
         <Link>Runtime\InstanceProvider\SingletonInstanceProvider.cs</Link>
       </Compile>
-      <Compile Include="..\UPM\Runtime\Interfaces\IFactory.cs">
+      <Compile Include="..\UPM\Runtime\Factory\IFactory.cs">
         <Link>Runtime\Interfaces\IFactory.cs</Link>
       </Compile>
       <Compile Include="..\UPM\Runtime\TypeAnalyzer\TypeAnalysisFlags.cs">
@@ -82,6 +85,12 @@
     <ItemGroup>
       <PackageReference Include="E314.Exceptions" Version="1.1.0" />
       <PackageReference Include="E314.Protect" Version="2.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\UPM\Runtime\Factory\IFactory.cs.meta">
+        <Link>Runtime\Factory\IFactory.cs.meta</Link>
+      </Content>
     </ItemGroup>
 
 </Project>

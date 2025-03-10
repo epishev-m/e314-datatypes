@@ -41,6 +41,10 @@ The `E314.DataTypes` module provides structures and data types.
     - [Usage Examples](#usage-examples)
       - [Full Type Analysis](#full-type-analysis)
       - [Selective Analysis](#selective-analysis)
+  - [Factory](#factory)
+    - [Key Features](#key-features-1)
+    - [Recommendations](#recommendations-8)
+    - [Usage Example](#usage-example-7)
 
 ## CapacityStrategy
 
@@ -346,5 +350,53 @@ Console.WriteLine("Properties:");
 foreach (var property in result.Properties)
 {
     Console.WriteLine(property.Name);
+}
+```
+
+## Factory
+
+Factory is an implementation of the `IFactory` interface that creates objects using a factory function.
+
+### Key Features
+
+- Object creation using `Func<object>` delegate
+- Automatic resource cleanup through `IDisposable` interface
+- Null parameter validation
+- Thread-safe object creation
+
+### Recommendations
+
+1. Use Factory when:
+   - You need to encapsulate object creation logic
+   - Object creation logic may change at runtime
+   - Lazy object creation is required
+
+2. Avoid using Factory when:
+   - Object creation logic is simple and requires no additional steps
+   - Object must be created immediately
+   - Multiple different types of objects need to be created
+
+### Usage Example
+
+```csharp
+// Creating a factory for strings
+var factory = new Factory(() => "Hello, World!");
+
+// Getting the object
+var message = (string)factory.Create();
+
+// Creating a factory for complex objects
+var complexFactory = new Factory(() =>
+{
+    var settings = new ComplexObject();
+    settings.Initialize();
+    return settings;
+});
+
+// Using with 'using' statement for automatic resource cleanup
+using (var factory = new Factory(() => new DisposableObject()))
+{
+    var obj = factory.Create();
+    // Working with the object
 }
 ```

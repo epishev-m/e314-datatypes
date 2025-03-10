@@ -26,6 +26,9 @@
       <Compile Include="..\UPM\Tests\CapacityStrategyTests.cs">
         <Link>Tests\CapacityStrategyTests.cs</Link>
       </Compile>
+      <Compile Include="..\UPM\Tests\Factory\FactoryTests.cs">
+        <Link>Tests\Factory\FactoryTests.cs</Link>
+      </Compile>
       <Compile Include="..\UPM\Tests\FastListTests.cs">
         <Link>Tests\FastListTests.cs</Link>
       </Compile>
