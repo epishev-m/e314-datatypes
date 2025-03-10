@@ -1,6 +1,6 @@
 # E314.DataTypes
 
-`E314.DataTypes` // todo
+The `E314.DataTypes` module provides structures and data types.
 
 ## Installation
 
