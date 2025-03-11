@@ -24,12 +24,23 @@ public sealed class FactoryInstanceProvider : IInstanceProvider
 	}
 
 	/// <summary>
+	/// Initializes a new instance of the <see cref="FactoryInstanceProvider"/> class with the specified factory.
+	/// </summary>
+	/// <param name="factory">The factory used to create instances. Must not be null.</param>
+	/// <exception cref="ArgNullException">Thrown if <paramref name="factory"/> is null.</exception>
+	public FactoryInstanceProvider(IFactory factory)
+	{
+		Requires.NotNull(factory, nameof(factory));
+		_factory = factory;
+	}
+
+	/// <summary>
 	/// Disposes of the managed instance provider and the factory if they implement <see cref="IDisposable"/>.
 	/// </summary>
 	public void Dispose()
 	{
-		_instanceProvider.Dispose();
-		_factory.Dispose();
+		_instanceProvider?.Dispose();
+		_factory?.Dispose();
 	}
 
 	/// <summary>

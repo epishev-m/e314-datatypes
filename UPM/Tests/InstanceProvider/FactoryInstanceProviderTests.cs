@@ -11,7 +11,8 @@ internal sealed class FactoryInstanceProviderTests
 	public void Constructor_ThrowsException_WhenInstanceProviderIsNull()
 	{
 		// Act & Assert
-		Assert.Throws<ArgNullException>(() => _ = new FactoryInstanceProvider(null));
+		Assert.Throws<ArgNullException>(() => _ = new FactoryInstanceProvider(instanceProvider: null));
+		Assert.Throws<ArgNullException>(() => _ = new FactoryInstanceProvider(factory: null));
 	}
 
 	[Test]
@@ -76,6 +77,67 @@ internal sealed class FactoryInstanceProviderTests
 
 		// Assert
 		Assert.That(mockFactory.IsDisposed, Is.True);
+	}
+
+	[Test]
+	public void Constructor_WithFactory_CreatesInstance()
+	{
+		// Arrange & Act
+		var mockFactory = new MockFactory();
+		var provider = new FactoryInstanceProvider(mockFactory);
+
+		// Assert
+		var instance = provider.GetInstance();
+		Assert.That(instance, Is.Not.Null);
+	}
+
+	[Test]
+	public void Constructor_WithInstanceProvider_CreatesInstance()
+	{
+		// Arrange
+		var mockFactory = new MockFactory();
+		var mockProvider = new MockInstanceProvider(mockFactory);
+		
+		// Act
+		var provider = new FactoryInstanceProvider(mockProvider);
+
+		// Assert
+		var instance = provider.GetInstance();
+		Assert.That(instance, Is.Not.Null);
+	}
+
+	[Test]
+	public void Dispose_WithoutInitializingFactory_OnlyDisposesProvider()
+	{
+		// Arrange
+		var mockFactory = new MockFactory();
+		var mockProvider = new MockInstanceProvider(mockFactory);
+		var provider = new FactoryInstanceProvider(mockProvider);
+
+		// Act
+		provider.Dispose();
+
+		// Assert
+		Assert.That(mockProvider.IsDisposed, Is.True);
+		Assert.That(mockFactory.IsDisposed, Is.False);
+	}
+
+	[Test]
+	public void GetInstance_WithInstanceProvider_ReusesFactoryInstance()
+	{
+		// Arrange
+		var mockFactory = new MockFactory();
+		var mockProvider = new MockInstanceProvider(mockFactory);
+		var provider = new FactoryInstanceProvider(mockProvider);
+
+		// Act
+		var instance1 = provider.GetInstance();
+		var instance2 = provider.GetInstance();
+
+		// Assert
+		Assert.That(instance1, Is.Not.Null);
+		Assert.That(instance2, Is.Not.Null);
+		Assert.That(mockProvider.CreateCalled, Is.EqualTo(1), "Factory should be created only once");
 	}
 
 	#region Nested
