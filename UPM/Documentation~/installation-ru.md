@@ -17,7 +17,7 @@
 ## Unity Package Manager. Git URL
 
 ```ps1
-https://github.com/epishev-m/e314-datatypes.git?path=UPM/#release/1.1.1
+https://github.com/epishev-m/e314-datatypes.git?path=UPM/#release/1.1.2
 ```
 
 1. Открыть Window → Package Manager.
@@ -36,7 +36,7 @@ https://openupm.com/packages/com.e314.datatypes.html
 4. Нажать Apply.
 5. Открыть Window → Package Manager.
 6. Нажать на + button → Add package by name...
-7. Введите Имя `com.e314.datatypes` и Версию `1.1.1`.
+7. Введите Имя `com.e314.datatypes` и Версию `1.1.2`.
 8. Нажмите Add.
 
 ## NuGet
@@ -50,5 +50,5 @@ https://www.nuget.org/packages/E314.DataTypes
 3. Выполнить команду для установки пакета NuGet:
 
 ```sh
-dotnet add package E314.DataTypes -v 1.1.1
+dotnet add package E314.DataTypes -v 1.1.2
 ```

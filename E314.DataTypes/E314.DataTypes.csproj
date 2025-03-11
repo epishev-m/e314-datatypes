@@ -9,7 +9,7 @@
         <Authors>Maksim Epishev (epishev.m@mail.ru)</Authors>
         <Copyright>Copyright (c) 2025 Maksim Epishev (epishev.m@mail.ru)</Copyright>
         <RepositoryType>Git</RepositoryType>
-        <Version>1.1.1</Version>
+        <Version>1.1.2</Version>
         <PackageId>E314.DataTypes</PackageId>
         <RepositoryUrl>https://github.com/epishev-m/e314-datatypes.git</RepositoryUrl>
         <PackageProjectUrl>https://github.com/epishev-m/e314-datatypes</PackageProjectUrl>
