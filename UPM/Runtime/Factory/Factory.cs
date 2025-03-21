@@ -18,7 +18,7 @@ public sealed class Factory : IFactory
 	/// <exception cref="E314.Protect.ArgNullException">Thrown if <paramref name="factoryFunc"/> is null.</exception>
 	public Factory(Func<object> factoryFunc)
 	{
-		Requires.NotNull(factoryFunc, nameof(factoryFunc));
+		Requires.NotNull(factoryFunc, nameof(factoryFunc), this);
 		_factoryFunc = factoryFunc;
 	}
 

@@ -20,7 +20,7 @@ public sealed class SingletonInstanceProvider : IInstanceProvider
 	/// <exception cref="ArgNullException">Thrown if <paramref name="instanceProvider"/> is null.</exception>
 	public SingletonInstanceProvider(IInstanceProvider instanceProvider)
 	{
-		Requires.NotNull(instanceProvider, nameof(instanceProvider));
+		Requires.NotNull(instanceProvider, nameof(instanceProvider), this);
 		_instanceProvider = instanceProvider;
 	}
 

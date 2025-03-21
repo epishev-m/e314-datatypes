@@ -24,10 +24,10 @@ public sealed class ListInstanceProvider : IInstanceProvider
 	/// <exception cref="ArgException">Thrown if <paramref name="providers"/> is empty or contains null elements.</exception>
 	public ListInstanceProvider(IReadOnlyCollection<IInstanceProvider> providers, Type type)
 	{
-		Requires.NotNull(providers, nameof(providers));
-		Requires.NotEmpty(providers, nameof(providers));
-		Requires.NoNullElements(providers, nameof(providers));
-		Requires.NotNull(type, nameof(type));
+		Requires.NotNull(providers, nameof(providers), this);
+		Requires.NotEmpty(providers, nameof(providers), this);
+		Requires.NoNullElements(providers, nameof(providers), this);
+		Requires.NotNull(type, nameof(type), this);
 		_providers = providers;
 		_type = type;
 	}

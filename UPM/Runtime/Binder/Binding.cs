@@ -27,8 +27,8 @@ public class Binding<TKey, TValue> : IBinding<TKey, TValue>
 	/// <exception cref="E314.Exceptions.ArgNullException">Thrown if <paramref name="capacityStrategy"/> or <paramref name="key"/> is null.</exception>
 	public Binding(ICapacityStrategy capacityStrategy, TKey key)
 	{
-		Requires.NotNull(capacityStrategy, nameof(capacityStrategy));
-		Requires.NotNull(key, nameof(key));
+		Requires.NotNull(capacityStrategy, nameof(capacityStrategy), this);
+		Requires.NotNull(key, nameof(key), this);
 		_values = new FastList<TValue>(1, capacityStrategy);
 		Key = key;
 	}
@@ -57,8 +57,8 @@ public class Binding<TKey, TValue> : IBinding<TKey, TValue>
 	/// <exception cref="E314.Exceptions.ObjDisposedException">Thrown if `Dispose` has been called.</exception>
 	public IBinding<TKey, TValue> To(TValue value)
 	{
-		Requires.NotDisposed(IsDisposed);
-		Requires.NotNull(value, nameof(value));
+		Requires.NotDisposed(IsDisposed, this);
+		Requires.NotNull(value, nameof(value), this);
 		_values.Add(value);
 		return this;
 	}
@@ -68,7 +68,7 @@ public class Binding<TKey, TValue> : IBinding<TKey, TValue>
 	/// </summary>
 	public void ClearValues()
 	{
-		Requires.NotDisposed(IsDisposed);
+		Requires.NotDisposed(IsDisposed, this);
 		_values.Clear();
 	}
 

@@ -19,7 +19,7 @@ public sealed class InstanceProvider : IInstanceProvider
 	/// <exception cref="E314.Protect.ArgNullException">Thrown if <paramref name="instance"/> is null.</exception>
 	public InstanceProvider(object instance)
 	{
-		Requires.NotNull(instance, nameof(instance));
+		Requires.NotNull(instance, nameof(instance), this);
 		_instance = instance;
 	}
 

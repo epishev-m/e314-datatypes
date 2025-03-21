@@ -19,7 +19,7 @@ public sealed class FactoryInstanceProvider : IInstanceProvider
 	/// <exception cref="ArgNullException">Thrown if <paramref name="instanceProvider"/> is null.</exception>
 	public FactoryInstanceProvider(IInstanceProvider instanceProvider)
 	{
-		Requires.NotNull(instanceProvider, nameof(instanceProvider));
+		Requires.NotNull(instanceProvider, nameof(instanceProvider), this);
 		_instanceProvider = instanceProvider;
 	}
 
@@ -30,7 +30,7 @@ public sealed class FactoryInstanceProvider : IInstanceProvider
 	/// <exception cref="ArgNullException">Thrown if <paramref name="factory"/> is null.</exception>
 	public FactoryInstanceProvider(IFactory factory)
 	{
-		Requires.NotNull(factory, nameof(factory));
+		Requires.NotNull(factory, nameof(factory), this);
 		_factory = factory;
 	}
 

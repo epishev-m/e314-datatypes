@@ -25,7 +25,7 @@ public sealed class TypeAnalyzer : ITypeAnalyzer
 	/// <returns>A result object containing the analyzed members of the type.</returns>
 	public TypeAnalysisResult Analyze(Type type, TypeAnalysisFlags flags = TypeAnalysisFlags.All)
 	{
-		Requires.NotNull(type, nameof(type));
+		Requires.NotNull(type, nameof(type), this);
 
 		if (!Cache.TryGetValue(type, out var result))
 		{

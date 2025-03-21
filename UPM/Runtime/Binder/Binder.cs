@@ -30,7 +30,7 @@ public class Binder<TKey, TValue> : IBinder<TKey, TValue>
 	/// <exception cref="E314.Exceptions.ArgNullException">Thrown if <paramref name="capacityStrategy"/> is null.</exception>
 	public Binder(ICapacityStrategy capacityStrategy, int capacity)
 	{
-		Requires.NotNull(capacityStrategy, nameof(capacityStrategy));
+		Requires.NotNull(capacityStrategy, nameof(capacityStrategy), this);
 		CapacityStrategy = capacityStrategy;
 		capacity = CapacityStrategy.CalculateCapacity(0, capacity);
 		_bindings = new Dictionary<TKey, IBinding<TKey, TValue>>(capacity);
@@ -49,8 +49,8 @@ public class Binder<TKey, TValue> : IBinder<TKey, TValue>
 	/// <exception cref="ArgumentNullException">Thrown if <paramref name="key"/> is null.</exception>
 	public IBinding<TKey, TValue> Bind(TKey key)
 	{
-		Requires.NotDisposed(_isDisposed);
-		Requires.NotNull(key, nameof(key));
+		Requires.NotDisposed(_isDisposed, this);
+		Requires.NotNull(key, nameof(key), this);
 		if (_bindings.TryGetValue(key, out var binding)) return binding;
 		binding = GetRawBinding(key);
 		_bindings.Add(key, binding);
@@ -65,8 +65,8 @@ public class Binder<TKey, TValue> : IBinder<TKey, TValue>
 	/// <exception cref="ArgumentNullException">Thrown if <paramref name="key"/> is null.</exception>
 	public bool Unbind(TKey key)
 	{
-		Requires.NotDisposed(_isDisposed);
-		Requires.NotNull(key, nameof(key));
+		Requires.NotDisposed(_isDisposed, this);
+		Requires.NotNull(key, nameof(key), this);
 		if (!_bindings.Remove(key, out var binding)) return false;
 		binding.Dispose();
 		return true;
@@ -80,8 +80,8 @@ public class Binder<TKey, TValue> : IBinder<TKey, TValue>
 	/// <exception cref="ArgumentNullException">Thrown if <paramref name="key"/> is null.</exception>
 	public IBinding<TKey, TValue> GetBinding(TKey key)
 	{
-		Requires.NotDisposed(_isDisposed);
-		Requires.NotNull(key, nameof(key));
+		Requires.NotDisposed(_isDisposed, this);
+		Requires.NotNull(key, nameof(key), this);
 		return _bindings.GetValueOrDefault(key);
 	}
 

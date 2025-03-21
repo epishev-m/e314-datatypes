@@ -29,7 +29,7 @@ public class FastList<T> : IReadOnlyList<T>, IDisposable
 	/// <exception cref="E314.Exceptions.ArgOutOfRangeException"> Thrown if <paramref name="capacity"/> is less than 1 or greater than <see cref="int.MaxValue"/>. </exception>
 	public FastList(int capacity = 1, ICapacityStrategy capacityStrategy = null)
 	{
-		Requires.InRange(capacity, 1, int.MaxValue, nameof(capacity));
+		Requires.InRange(capacity, 1, int.MaxValue, nameof(capacity), this);
 		_capacityStrategy = capacityStrategy ?? new CapacityStrategy();
 		_items = ArrayPool.Rent(capacity);
 		_capacity = capacity;
@@ -76,12 +76,12 @@ public class FastList<T> : IReadOnlyList<T>, IDisposable
 	{
 		get
 		{
-			Requires.InRange(index, 0, _count, nameof(index));
+			Requires.InRange(index, 0, _count, nameof(index), this);
 			return _items[index];
 		}
 		set
 		{
-			Requires.InRange(index, 0, _count, nameof(index));
+			Requires.InRange(index, 0, _count, nameof(index), this);
 			_items[index] = value;
 		}
 	}
